@@ -8,7 +8,8 @@ TODO:
 
 [x] parse arguments passed to our rust cli `cargo run searchstring example-filename.txt`
 [x] read the argument values
-[ ] reading a file
+[x] reading a file
+[ ] fix modularity and readability
 [ ] handle errors
 [ ] use Env vars
 [ ] search for a string in the file!
