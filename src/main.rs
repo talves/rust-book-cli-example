@@ -22,6 +22,9 @@ struct Config {
 
 impl Config {
     fn new(args: &[String]) -> Config {
+        if args.len() < 3 {
+            panic!("Must have 2 arguments. Example: cargo run <query> <filename>");
+        }
         // capture our arguments in variables
         let query = args[1].clone();
         let filename = args[2].clone();
