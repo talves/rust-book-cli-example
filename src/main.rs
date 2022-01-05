@@ -4,18 +4,25 @@ fn main() {
     // cargo run searchstring poem.txt
     let args: Vec<String> = env::args().collect();
 
-    let (query, filename) = parse_arguments(&args);
+    let config = parse_arguments(&args);
 
     // read in the file
-    let contents = fs::read_to_string(filename).expect("Something went wrong reading the file");
+    let contents =
+        fs::read_to_string(config.filename).expect("Something went wrong reading the file");
 
     println!("With text:\n{}", contents);
+    println!("Searching for: {}", config.query);
 }
 
-fn parse_arguments(args: &[String]) -> (&str, &str) {
+struct Config {
+    query: String,
+    filename: String,
+}
+
+fn parse_arguments(args: &[String]) -> Config {
     // capture our arguments in variables
-    let query = &args[1];
-    let filename = &args[2];
+    let query = args[1].clone();
+    let filename = args[2].clone();
     println!("Searching for '{}'", query);
     println!("In file {}", filename);
 
@@ -26,5 +33,5 @@ fn parse_arguments(args: &[String]) -> (&str, &str) {
         count += 1;
     }
 
-    (query, filename)
+    Config { query, filename }
 }
