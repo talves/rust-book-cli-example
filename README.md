@@ -10,6 +10,6 @@ TODO:
 [x] read the argument values
 [x] reading a file
 [x] fix modularity and readability
-[ ] handle errors
+[x] handle errors
 [ ] use Env vars
 [ ] search for a string in the file!
