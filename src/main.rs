@@ -4,7 +4,8 @@ fn main() {
     // cargo run searchstring poem.txt
     let args: Vec<String> = env::args().collect();
 
-    let config = parse_arguments(&args);
+    // made and used a constructor instead
+    let config = Config::new(&args);
 
     // read in the file
     let contents =
@@ -19,19 +20,21 @@ struct Config {
     filename: String,
 }
 
-fn parse_arguments(args: &[String]) -> Config {
-    // capture our arguments in variables
-    let query = args[1].clone();
-    let filename = args[2].clone();
-    println!("Searching for '{}'", query);
-    println!("In file {}", filename);
+impl Config {
+    fn new(args: &[String]) -> Config {
+        // capture our arguments in variables
+        let query = args[1].clone();
+        let filename = args[2].clone();
+        println!("Searching for '{}'", query);
+        println!("In file {}", filename);
 
-    // output list with index
-    let mut count = 0;
-    for argument in args {
-        println!("{}: {}", count, argument);
-        count += 1;
+        // output list with index
+        let mut count = 0;
+        for argument in args {
+            println!("{}: {}", count, argument);
+            count += 1;
+        }
+
+        Config { query, filename }
     }
-
-    Config { query, filename }
 }
