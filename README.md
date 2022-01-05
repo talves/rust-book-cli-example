@@ -6,8 +6,8 @@ Let's do this! 🔥
 
 TODO:
 
-[ ] parse arguments passed to our rust cli `cargo run searchstring example-filename.txt`
-[ ] read the argument values
+[x] parse arguments passed to our rust cli `cargo run searchstring example-filename.txt`
+[x] read the argument values
 [ ] reading a file
 [ ] handle errors
 [ ] use Env vars
