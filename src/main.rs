@@ -1,3 +1,4 @@
+use std::process;
 use std::{env, fs};
 
 fn main() {
@@ -5,7 +6,10 @@ fn main() {
     let args: Vec<String> = env::args().collect();
 
     // made and used a constructor instead
-    let config = Config::new(&args);
+    let config = Config::new(&args).unwrap_or_else(|err| {
+        println!("Fatal Error: {}", err);
+        process::exit(1);
+    });
 
     // read in the file
     let contents =
@@ -21,9 +25,9 @@ struct Config {
 }
 
 impl Config {
-    fn new(args: &[String]) -> Config {
+    fn new(args: &[String]) -> Result<Config, &str> {
         if args.len() < 3 {
-            panic!("Must have 2 arguments. Example: cargo run <query> <filename>");
+            return Err("Must have 2 arguments. Example: cargo run <query> <filename>");
         }
         // capture our arguments in variables
         let query = args[1].clone();
@@ -38,6 +42,6 @@ impl Config {
             count += 1;
         }
 
-        Config { query, filename }
+        Ok(Config { query, filename })
     }
 }
