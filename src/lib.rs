@@ -1,9 +1,10 @@
 use std::error::Error;
-use std::fs;
+use std::{env, fs};
 
 pub struct Config {
     pub query: String,
     pub filename: String,
+    pub case_sensitive: bool,
 }
 
 impl Config {
@@ -14,6 +15,11 @@ impl Config {
         // capture our arguments in variables
         let query = args[1].clone();
         let filename = args[2].clone();
+        let case_sensitive = if args.len() > 3 {
+            args[3].clone() == "true"
+        } else {
+            env::var("CASE_INSENSITIVE").is_err()
+        };
         println!("Searching for '{}'", query);
         println!("In file {}", filename);
 
@@ -24,7 +30,11 @@ impl Config {
             count += 1;
         }
 
-        Ok(Config { query, filename })
+        Ok(Config {
+            query,
+            filename,
+            case_sensitive,
+        })
     }
 }
 
@@ -35,7 +45,14 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
 
     println!("search vec:\n{:?}", search(&config.query, &contents));
     println!("Searching for: {}", config.query);
-    for line in search(&config.query, &contents) {
+
+    let results = if config.case_sensitive {
+        search(&config.query, &contents)
+    } else {
+        search_case_insensitive(&config.query, &contents)
+    };
+
+    for line in results {
         println!(" {}", line);
     }
 
