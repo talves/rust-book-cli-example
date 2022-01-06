@@ -9,7 +9,7 @@ fn main() {
     // cargo run searchstring poem.txt
     let args: Vec<String> = env::args().collect();
 
-    simulated_expensive_calculation(20);
+    generate_workout(12, 3);
 
     // made and used a constructor instead
     let config = Config::new(&args).unwrap_or_else(|err| {
@@ -24,8 +24,21 @@ fn main() {
     }
 }
 
-fn simulated_expensive_calculation(intensity: u32) -> u32 {
-    println!("calculating slowly...");
-    thread::sleep(Duration::from_secs(2));
-    intensity
+fn generate_workout(intensity: u32, random_number: u32) {
+    let expensive_closure = |num| {
+        println!("calculating slowly...");
+        thread::sleep(Duration::from_secs(2));
+        num
+    };
+
+    if intensity < 25 {
+        println!("Today, do {} pushups!", expensive_closure(intensity));
+        println!("Next, do {} situps!", expensive_closure(intensity));
+    } else {
+        if random_number == 3 {
+            println!("Take a break today! Remember to stay hydrated!");
+        } else {
+            println!("Today, run for {} minutes!", expensive_closure(intensity));
+        }
+    }
 }
