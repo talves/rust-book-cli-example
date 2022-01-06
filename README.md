@@ -11,5 +11,6 @@ TODO:
 [x] reading a file
 [x] fix modularity and readability
 [x] handle errors
+[ ] write tests -> ok
 [ ] use Env vars
 [ ] search for a string in the file!
