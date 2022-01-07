@@ -1,3 +1,8 @@
+//! # Rust book cli example
+//!
+//! `rust-book-cli-example` is an example application started from the cli chapter of the Rust book.
+//!
+
 use std::error::Error;
 use std::thread;
 use std::time::Duration;
