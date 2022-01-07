@@ -10,6 +10,7 @@ fn main() {
 
     generate_workout(12, 3);
     generate_workout(30, 12);
+    test_iterators();
 
     // made and used a constructor instead
     let config = Config::new(&args).unwrap_or_else(|err| {
@@ -21,5 +22,15 @@ fn main() {
         eprintln!("Application error: {}", e);
 
         process::exit(1);
+    }
+}
+
+fn test_iterators() {
+    let v1 = vec![1, 2, 3];
+
+    // let v1_iter = v1.iter();
+
+    for val in v1.iter() {
+        println!("Got: {}", val);
     }
 }
