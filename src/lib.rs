@@ -259,6 +259,19 @@ Trust me.";
         assert_eq!(counter.next(), Some(5));
         assert_eq!(counter.next(), None);
     }
+    #[test]
+    fn using_other_iterator_trait_methods() {
+        let zipped = Counter::new()
+            .zip(Counter::new().skip(1))
+            .map(|(a, b)| a * b);
+        eprintln!("zipped: {:?}", zipped);
+        let sum: u32 = Counter::new()
+            .zip(Counter::new().skip(1))
+            .map(|(a, b)| a * b)
+            .filter(|x| x % 3 == 0)
+            .sum();
+        assert_eq!(18, sum);
+    }
 }
 
 pub fn test_iterators() {
@@ -281,6 +294,7 @@ fn shoes_in_size(shoes: Vec<Shoe>, shoe_size: u32) -> Vec<Shoe> {
     shoes.into_iter().filter(|s| s.size == shoe_size).collect()
 }
 
+#[derive(Debug)]
 struct Counter {
     count: u32,
 }
