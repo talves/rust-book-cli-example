@@ -1,7 +1,7 @@
 use std::env;
 use std::process;
 
-use rust_book_cli_example::generate_workout;
+use rust_book_cli_example::{generate_workout, test_iterators};
 use rust_book_cli_example::{run, Config};
 
 fn main() {
@@ -22,15 +22,5 @@ fn main() {
         eprintln!("Application error: {}", e);
 
         process::exit(1);
-    }
-}
-
-fn test_iterators() {
-    let v1 = vec![1, 2, 3];
-
-    // let v1_iter = v1.iter();
-
-    for val in v1.iter() {
-        println!("Got: {}", val);
     }
 }
