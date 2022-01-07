@@ -197,5 +197,17 @@ fn iterator_demonstration() {
     assert_eq!(v1_iter.next(), Some(&3));
     assert_eq!(v1_iter.next(), None);
     eprintln!("v1_iter: {:?}", v1_iter);
+    let sum_value: i32 = v1_iter.sum();
+    eprintln!("v1_iter sum: {:?}", sum_value);
     eprintln!("v1: {:?}", v1);
+}
+#[test]
+fn iterator_sum() {
+    let v1 = vec![1, 2, 3];
+
+    let v1_iter = v1.iter();
+
+    let total: i32 = v1_iter.sum();
+
+    assert_eq!(total, 6);
 }
