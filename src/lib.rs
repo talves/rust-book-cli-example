@@ -10,18 +10,39 @@ pub struct Config {
 }
 
 impl Config {
-    pub fn new(args: &[String]) -> Result<Config, &str> {
-        if args.len() < 3 {
-            return Err("Must have 2 arguments. Example: cargo run <query> <filename>");
-        }
-        // capture our arguments in variables
-        let query = args[1].clone();
-        let filename = args[2].clone();
-        let case_sensitive = if args.len() > 3 {
-            args[3].clone() == "true"
-        } else {
-            env::var("CASE_INSENSITIVE").is_err()
+    pub fn new(mut args: env::Args) -> Result<Config, &'static str> {
+        // refactor (wow, so awesome!)
+        args.next(); // skip the crappy first value
+
+        let query = match args.next() {
+            Some(arg) => arg,
+            None => return Err("Missing a query string"),
         };
+
+        let filename = match args.next() {
+            Some(arg) => arg,
+            None => return Err("Missing a file name path"),
+        };
+
+        if args.len() > 3 {
+            return Err(
+                "Must have 2 arguments. Example: cargo run <query> <filename> [<true|false>]",
+            );
+        }
+
+        let case_sensitive = match args.next() {
+            Some(arg) => arg == "true",
+            None => env::var("CASE_INSENSITIVE").is_err(),
+        };
+
+        // capture our arguments in variables
+        // let query = args[1].clone();
+        // let filename = args[2].clone();
+        // let case_sensitive = if args.len() > 3 {
+        //     args[3].clone() == "true"
+        // } else {
+        //     env::var("CASE_INSENSITIVE").is_err()
+        // };
         println!("Searching for '{}'", query);
         println!("In file {}", filename);
 
