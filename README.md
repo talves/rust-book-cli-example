@@ -6,11 +6,11 @@ Let's do this! 🔥
 
 TODO:
 
-[x] parse arguments passed to our rust cli `cargo run searchstring example-filename.txt`
-[x] read the argument values
-[x] reading a file
-[x] fix modularity and readability
-[x] handle errors
-[x] write tests -> ok
-[x] use Env vars
-[x] search for a string in the file!
+- [x] parse arguments passed to our rust cli `cargo run searchstring example-filename.txt`
+- [x] read the argument values
+- [x] reading a file
+- [x] fix modularity and readability
+- [x] handle errors
+- [x] write tests -> ok
+- [x] use Env vars
+- [x] search for a string in the file!
