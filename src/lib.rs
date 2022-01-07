@@ -3,6 +3,20 @@ use std::thread;
 use std::time::Duration;
 use std::{env, fs};
 
+/// Creates a Config using new()
+///
+///  # Examples
+///  
+/// ```
+/// use std::env;
+/// use std::process;
+/// use rust_book_cli_example::Config;
+///  
+/// let config = Config::new(env::args()).unwrap_or_else(|err| {
+///     eprintln!("Fatal Error: {}", err);
+///     process::exit(1);
+/// });
+/// ```
 pub struct Config {
     pub query: String,
     pub filename: String,
